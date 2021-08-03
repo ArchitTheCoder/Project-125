@@ -1,4 +1,5 @@
 import numpy as np
+import cv2
 import pandas as pd
 from sklearn.datasets import fetch_openml
 from sklearn.model_selection import train_test_split
@@ -22,7 +23,7 @@ X_test_scaled = X_test / 255.0
 clf = LogisticRegression(solver= "saga", multi_class= "multinomial").fit(X_train_scaled, y_train)
 
 def get_prediction(image):
-    im_pil = Image.open(image)
+    im_pil = cv2.imread(image)
     img_bw = im_pil.convert("L")
     img_bw_resized = img_bw.resize((28, 28), Image.ANTIALIAS)
     pixel_filter = 20
